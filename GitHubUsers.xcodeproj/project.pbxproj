@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0472F522D8CAD3006F1CD8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0472F322D8CAD3006F1CD8 /* Constants.swift */; };
+		3E0472F622D8CAD3006F1CD8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0472F422D8CAD3006F1CD8 /* Utility.swift */; };
 		3E134CCB22D75FCC00725DFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CCA22D75FCC00725DFE /* AppDelegate.swift */; };
 		3E134CCD22D75FCC00725DFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CCC22D75FCC00725DFE /* ViewController.swift */; };
 		3E134CD022D75FCC00725DFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E134CCE22D75FCC00725DFE /* Main.storyboard */; };
 		3E134CD222D75FCF00725DFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E134CD122D75FCF00725DFE /* Assets.xcassets */; };
 		3E134CD522D75FCF00725DFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E134CD322D75FCF00725DFE /* LaunchScreen.storyboard */; };
 		3E134CE022D75FCF00725DFE /* GitHubUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CDF22D75FCF00725DFE /* GitHubUsersTests.swift */; };
+		3E134CEE22D76B9B00725DFE /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CEB22D76B9B00725DFE /* Service.swift */; };
+		3E134CEF22D76B9B00725DFE /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CEC22D76B9B00725DFE /* ServiceManager.swift */; };
+		3E134CF022D76B9B00725DFE /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CED22D76B9B00725DFE /* URLConstants.swift */; };
+		3E134CF322D76BA700725DFE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CF222D76BA700725DFE /* SwiftyJSON.swift */; };
+		3E134CF522D8668300725DFE /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CF422D8668300725DFE /* UserDetailViewController.swift */; };
+		3E134CF722D866B900725DFE /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CF622D866B900725DFE /* UserTableViewCell.swift */; };
+		3E134CF922D866D900725DFE /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E134CF822D866D900725DFE /* RepoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0472F322D8CAD3006F1CD8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3E0472F422D8CAD3006F1CD8 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		3E134CC722D75FCC00725DFE /* GitHubUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E134CCA22D75FCC00725DFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E134CCC22D75FCC00725DFE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +47,13 @@
 		3E134CDB22D75FCF00725DFE /* GitHubUsersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubUsersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E134CDF22D75FCF00725DFE /* GitHubUsersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUsersTests.swift; sourceTree = "<group>"; };
 		3E134CE122D75FCF00725DFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E134CEB22D76B9B00725DFE /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		3E134CEC22D76B9B00725DFE /* ServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		3E134CED22D76B9B00725DFE /* URLConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
+		3E134CF222D76BA700725DFE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		3E134CF422D8668300725DFE /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		3E134CF622D866B900725DFE /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		3E134CF822D866D900725DFE /* RepoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +74,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E0472F222D8CAD3006F1CD8 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				3E0472F322D8CAD3006F1CD8 /* Constants.swift */,
+				3E0472F422D8CAD3006F1CD8 /* Utility.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		3E134CBE22D75FCC00725DFE = {
 			isa = PBXGroup;
 			children = (
@@ -77,12 +104,17 @@
 		3E134CC922D75FCC00725DFE /* GitHubUsers */ = {
 			isa = PBXGroup;
 			children = (
+				3E0472F222D8CAD3006F1CD8 /* Utility */,
+				3E134CF122D76BA700725DFE /* ExternalLib */,
+				3E134CEA22D76B9B00725DFE /* Services */,
 				3E134CCA22D75FCC00725DFE /* AppDelegate.swift */,
-				3E134CCC22D75FCC00725DFE /* ViewController.swift */,
+				3E134CFA22D86C5600725DFE /* Controllers */,
 				3E134CCE22D75FCC00725DFE /* Main.storyboard */,
+				3E134CF822D866D900725DFE /* RepoTableViewCell.swift */,
 				3E134CD122D75FCF00725DFE /* Assets.xcassets */,
 				3E134CD322D75FCF00725DFE /* LaunchScreen.storyboard */,
 				3E134CD622D75FCF00725DFE /* Info.plist */,
+				3E134CF622D866B900725DFE /* UserTableViewCell.swift */,
 			);
 			path = GitHubUsers;
 			sourceTree = "<group>";
@@ -94,6 +126,33 @@
 				3E134CE122D75FCF00725DFE /* Info.plist */,
 			);
 			path = GitHubUsersTests;
+			sourceTree = "<group>";
+		};
+		3E134CEA22D76B9B00725DFE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3E134CEB22D76B9B00725DFE /* Service.swift */,
+				3E134CEC22D76B9B00725DFE /* ServiceManager.swift */,
+				3E134CED22D76B9B00725DFE /* URLConstants.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3E134CF122D76BA700725DFE /* ExternalLib */ = {
+			isa = PBXGroup;
+			children = (
+				3E134CF222D76BA700725DFE /* SwiftyJSON.swift */,
+			);
+			path = ExternalLib;
+			sourceTree = "<group>";
+		};
+		3E134CFA22D86C5600725DFE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3E134CCC22D75FCC00725DFE /* ViewController.swift */,
+				3E134CF422D8668300725DFE /* UserDetailViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +256,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E134CF522D8668300725DFE /* UserDetailViewController.swift in Sources */,
 				3E134CCD22D75FCC00725DFE /* ViewController.swift in Sources */,
+				3E134CF022D76B9B00725DFE /* URLConstants.swift in Sources */,
+				3E0472F622D8CAD3006F1CD8 /* Utility.swift in Sources */,
 				3E134CCB22D75FCC00725DFE /* AppDelegate.swift in Sources */,
+				3E134CF722D866B900725DFE /* UserTableViewCell.swift in Sources */,
+				3E0472F522D8CAD3006F1CD8 /* Constants.swift in Sources */,
+				3E134CF922D866D900725DFE /* RepoTableViewCell.swift in Sources */,
+				3E134CF322D76BA700725DFE /* SwiftyJSON.swift in Sources */,
+				3E134CEE22D76B9B00725DFE /* Service.swift in Sources */,
+				3E134CEF22D76B9B00725DFE /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
