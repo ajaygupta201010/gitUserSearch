@@ -9,11 +9,23 @@
 import Foundation
 
 struct URLConstants {
-    static let git = "https://api.github.com/search/repositories"
-    static let gmap = "https://www.google.com/search/"
-    static func searchURL(for user: String, page: Int = 1) -> String { 
-        var baseUrl = "https://api.github.com/search/users"
-        let component = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)
-        baseUrl = baseUrl + "q=\(for)&page=1
+    
+    struct Git {
+        static let repo = "https://api.github.com/search/repositories"
+        static let gmap = "https://www.google.com/search/"
+        static let search = "https://api.github.com/search/users"
+        static let userDetails = "https://api.github.com/users/"
     }
+    
+//    static func searchURL(for user: String, page: Int = 1) -> URL? {
+//        guard let baseUrl = URL(string: "https://api.github.com/search/users") else {
+//            return nil
+//        }
+//        var urlComponent = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)
+//        urlComponent?.queryItems = [
+//            URLQueryItem(name: "q", value: user),
+//            URLQueryItem(name: "page", value: String(describing: page))
+//        ]
+//        return urlComponent?.url
+//    }
 }

@@ -8,60 +8,81 @@
 
 import Foundation
 
-typealias Prarameter = [String: String]
-typealias Response = [String: Any]
+public typealias Prarameter = [String: String]
+public typealias Response = [String: Any]
 
 
 class ServiceManager {
     
-    static func getRepoData(searchText: String, completion: @escaping (GitResponseModel?) -> Void) {
-        let url: String = URLConstants.git
-        let param = Utility.setSearchParm(repo: searchText)
+    static func searchUsers<T: Decodable>(search: String, page: Int, type: T.Type, completion: @escaping (Result<T>) -> Void) {
+        let url: String = URLConstants.Git.search
+        let param = [
+            "q": search,
+            "page": String(describing: page),
+            "sort": "score"
+        ]
         
-        Service.sendRequest(url, parameters: param) { data, error in
-            if let resultData = data {
-                do {
-                    let jsonDecoder = JSONDecoder()
-                    let responseModel = try jsonDecoder.decode(GitResponseModel.self, from: resultData)
-                    completion(responseModel)
-                } catch {
-                    print("cant decode to git response: \(error.localizedDescription)")
-                    completion(nil)
-                }
+        Service.request(url, parameters: param, type: type) { result in
+            switch result {
+            case .success(let object):
+                completion(Result.success(object))
+            case .failure(let error):
+                completion(Result.failure(error))
             }
-            //            switch result {
-            //            case .success(let data):
-            //                do {
-            //                    let jsonDecoder = JSONDecoder()
-            //                    let responseModel = try jsonDecoder.decode(GitRepositoryModel.self, from: data)
-            //                    print("responseModel: \(responseModel.total_count)")
-            //                } catch {
-            //                    print("cant decode to git response")
-            //                }
-            //
-            //            case .failure(let error): break
-            //            }
         }
     }
     
+    static func fetchUserProfile<T: Decodable>(url: String, type: T.Type, completion: @escaping (T?) -> Void) {
+        var gitUserProfile: GitUserProfile?
+        Service.request(url, parameters: nil, type: type) { result in
+            switch result {
+            case .success(let gitUserDetails):
+                gitUserProfile = gitUserDetails as? GitUserProfile
+                self.fetchGitRepos(url: gitUserProfile?.repos_url ?? "", type: GitUserRepoList.self, completion: { gitUserRepos in
+                    gitUserProfile?.repo = gitUserRepos?.gitRepo
+                    completion(gitUserProfile as? T)
+                })
+                completion(gitUserProfile as? T)
+            case .failure(let error):
+                print("Error..\(error) in \(url) response")
+                completion(gitUserProfile as? T)
+            }
+        }
+    }
     
-    static func getRepoContent(url: String, completion: @escaping (String?) -> Void) {
-        Service.sendRequest(url, completion: { data, error in
-            if let resultData = data {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: resultData, options: .mutableContainers) as? [String: Any] {
-                        if let dependency = JSON(json)["content"].string {
-                            let str = dependency.base64Decoded()
-                            completion(str)
-                        }
-                    }
-                } catch {
-                    print("cant decode to git response: \(error.localizedDescription)")
-                    completion(nil)
-                }
-            } else {
+    static private func fetchGitRepos<T: Decodable>(url: String, type: T.Type, completion: @escaping (T?) -> Void) {
+        Service.request(url, parameters: nil, type: type) { result in
+            switch result {
+            case .success(let gitUserRepos):
+                completion(gitUserRepos)
+            case .failure(_):
                 completion(nil)
             }
-        })
+        }
+    }
+    
+    static func fetchUserRepos<T: Decodable>(url: String, type: T.Type, completion: @escaping (Result<T>) -> Void) {
+        Service.request(url, parameters: nil, type: type) { result in
+            switch result {
+            case .success(let object):
+                completion(Result.success(object))
+            case .failure(let error):
+                completion(Result.failure(error))
+            }
+        }
+    }
+    
+    static func getRepoData<T: Decodable>(searchText: String, type: T.Type, completion: @escaping (Result<T>) -> Void) {
+        let url: String = URLConstants.Git.gmap
+        let param = Utility.setSearchParm(repo: searchText)
+        
+        Service.request(url, parameters: param, type: type) { result in
+            switch result {
+            case .success(let object):
+                completion(Result.success(object))
+            case .failure(let error):
+                completion(Result.failure(error))
+            }
+        }
     }
 }

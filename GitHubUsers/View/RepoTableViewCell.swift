@@ -14,19 +14,18 @@ class RepoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var watchCountLabel: UILabel!
     @IBOutlet weak var viewRepoButton: UIButton!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
+    private var repoUrl: String = ""
 
     @IBAction func viewRepoButtonClicked(_ sender: Any) {
-        guard let url = URL(string: "https://github.com/torvalds") else {return}
+        guard let url = URL(string: repoUrl) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func configUI(repo: GitUserRepo) {
+        repoNameLabel.text = repo.full_name
+        repoDesriptionLabel.text = repo.description
+        watchCountLabel.text = String(describing: repo.forks ?? 0)
+        repoUrl = repo.html_url ?? ""
     }
 }

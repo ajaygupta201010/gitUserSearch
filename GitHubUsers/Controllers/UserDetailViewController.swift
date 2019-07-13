@@ -9,6 +9,13 @@
 import UIKit
 
 class UserDetailViewController: UIViewController {
+    // pass data from previous viewController
+    var userProfileUrl: String = ""
+    var userRepoUrl: String = ""
+    
+    private var userProfile: GitUserProfile?
+    private var repoList: [GitUserRepo] = []
+    
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userFullName: UILabel!
     @IBOutlet weak var companyName: UILabel!
@@ -18,35 +25,70 @@ class UserDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addBackButton()
-        repositoriesTableView.dataSource = self
-        // Do any additional setup after loading the view.
+        setup()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
+// MARK: private and local methods
+extension UserDetailViewController {
+    func setup() {
+        repositoriesTableView.dataSource = self
+        repositoriesTableView.tableFooterView = UIView()
+        self.fetchUserProfileDetails(url: userProfileUrl)
+    }
+    
+    func updateUserDetails() {
+        guard let usrProfile = userProfile else { return }
+        fetchAvatar(urlStr: userProfile?.avatar_url ?? "")
+        userFullName.text = usrProfile.name
+        companyName.text = usrProfile.company
+        followers.text = String(describing: usrProfile.followers ?? 0)
+        lastUpdateAtLabel.text = usrProfile.updated_at
+    }
+    
+    private func fetchAvatar(urlStr: String) {
+        guard let url = URL(string: urlStr) else { return }
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                if let img = UIImage(data: data) {
+                    Utility.maskCircle(view: self.userImageView, anyImage: img)
+                }
+            }
+        }
+    }
+}
+
+// MARK: UITableViewDataSource
 extension UserDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return repoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "repoTableCell", for: indexPath) as? RepoTableViewCell else {
             return UITableViewCell()
         }
+        cell.configUI(repo: repoList[indexPath.row])
         return cell
     }
 }
 
+// MARK: service calls
+extension UserDetailViewController {
+    func fetchUserProfileDetails(url: String) {
+        ServiceManager.fetchUserProfile(url: url, type: GitUserProfile.self) { (usrProfile) in
+            self.userProfile = usrProfile
+            DispatchQueue.main.async {
+                self.updateUserDetails()
+            }
+            
+            if let repos = usrProfile?.repo, !repos.isEmpty {
+                self.repoList = repos
+                DispatchQueue.main.async {
+                    self.repositoriesTableView.reloadData()
+                }
+            }
+        }
+    }
+}

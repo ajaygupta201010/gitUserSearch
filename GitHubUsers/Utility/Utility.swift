@@ -7,29 +7,37 @@
 //
 
 import Foundation
-import CommonCrypto
-
+import UIKit
 
 class Utility {
     class func setSearchParm(repo: String) -> Prarameter {
         return [
             "q": repo,
             "sort": "star",
-            "order": "desc"
+            "order": "desc",
         ]
     }
     
-    class func md5(_ string: String) -> String {
-        let context = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
-        var digest = Array<UInt8>(repeating:0, count:Int(CC_MD5_DIGEST_LENGTH))
-        CC_MD5_Init(context)
-        CC_MD5_Update(context, string, CC_LONG(string.lengthOfBytes(using: String.Encoding.utf8)))
-        CC_MD5_Final(&digest, context)
-        context.deallocate()
-        var hexString = ""
-        for byte in digest {
-            hexString += String(format:"%02x", byte)
+    class func setParams(parms: Dictionary<String, String>) -> String {
+        var parts: [String] = []
+        for (key, value) in parms {
+            let part = String(format: "%@=%@",
+                              String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+                              String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+            parts.append(part as String)
         }
-        return hexString
+        return parts.joined(separator: "&")
+    }
+    
+    class func maskCircle(view: UIImageView, anyImage: UIImage) {
+        view.contentMode = .scaleAspectFill
+        view.layer.cornerRadius = view.frame.height / 2
+        view.layer.masksToBounds = false
+        view.clipsToBounds = true
+        
+        // make square(* must to make circle),
+        // resize(reduce the kilobyte) and
+        // fix rotation.
+        view.image = anyImage
     }
 }

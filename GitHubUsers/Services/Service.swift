@@ -9,16 +9,21 @@
 import Foundation
 import UIKit
 
-//enum Result<Data, Error> {
-//    case success(Data)
-//    case failure(Error)
-//}
+enum Result<T> {
+    case success(T)
+    case failure(ServiceErrors)
+}
 
 // makes server calls
 class Service {
     
-    static func sendRequest(_ url: String, parameters: Prarameter? = nil, completion: @escaping (Data?, Error?) -> Void) {
-        var components = URLComponents(string: url)!
+    static func request<T: Decodable>(_ url: String, parameters: Prarameter? = nil, type model: T.Type, completion: @escaping (Result<T>) -> Void) {
+        
+        guard var components = URLComponents(string: url) else {
+            print("ERROR: ..Incorrect URL..")
+            completion(Result.failure(ServiceErrors.invalidUrl))
+            return
+        }
         components.queryItems = parameters?.map { (key, value) in
             URLQueryItem(name: key, value: value)
         }
@@ -31,10 +36,17 @@ class Service {
                 let response = response as? HTTPURLResponse,  // is there HTTP response
                 (200 ..< 300) ~= response.statusCode,         // is statusCode 2XX
                 error == nil else {                           // was there no error, otherwise ...
-                    completion(nil, error)
+                    completion(Result.failure(ServiceErrors.unknown))
                     return
             }
-            completion(resultData, nil)
+            do {
+                let jsonDecoder = JSONDecoder()
+                let responseModel = try jsonDecoder.decode(model, from: resultData)
+                completion(Result.success(responseModel))
+            } catch {
+                print("cant decode to git response: \(error.localizedDescription)")
+                completion(Result.failure(ServiceErrors.invalidResponseJson))
+            }
         }
         task.resume()
     }

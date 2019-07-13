@@ -9,10 +9,7 @@
 import Foundation
 
 struct Constants {
-    static let gitRepoCell = "gitRepoCell"
-    static let topRepoCell = "topRepoCell"
-    
-    struct dataStore {
-        static let key = "com.git.app.topRepository"
+    struct Search {
+        static let resultCell = "gitSearchResultCell"
     }
 }
