@@ -12,8 +12,9 @@ class RepoTableViewCell: UITableViewCell {
     @IBOutlet weak var repoNameLabel: UILabel!
     @IBOutlet weak var repoDesriptionLabel: UILabel!
     
-    @IBOutlet weak var watchCountLabel: UILabel!
+    @IBOutlet weak var forks: UILabel!
     @IBOutlet weak var viewRepoButton: UIButton!
+
     
     private var repoUrl: String = ""
 
@@ -25,7 +26,7 @@ class RepoTableViewCell: UITableViewCell {
     func configUI(repo: GitUserRepo) {
         repoNameLabel.text = repo.full_name
         repoDesriptionLabel.text = repo.description
-        watchCountLabel.text = String(describing: repo.forks ?? 0)
+        forks.text = String(describing: repo.forks ?? 0)
         repoUrl = repo.html_url ?? ""
     }
 }

@@ -40,4 +40,20 @@ class Utility {
         // fix rotation.
         view.image = anyImage
     }
+    
+    class func getPresentVC() -> UIViewController? {
+        return UIApplication.shared.keyWindow?.rootViewController
+    }
+    
+    class func convertDate(_ date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        let date_ = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        if let dt = date_ {
+            return dateFormatter.string(from: dt)
+        }
+        return ""
+        
+    }
 }

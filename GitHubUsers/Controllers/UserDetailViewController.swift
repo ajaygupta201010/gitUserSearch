@@ -43,7 +43,7 @@ extension UserDetailViewController {
         userFullName.text = usrProfile.name
         companyName.text = usrProfile.company
         followers.text = String(describing: usrProfile.followers ?? 0)
-        lastUpdateAtLabel.text = usrProfile.updated_at
+        lastUpdateAtLabel.text = Utility.convertDate(usrProfile.updated_at ?? "")
     }
     
     private func fetchAvatar(urlStr: String) {
@@ -66,7 +66,8 @@ extension UserDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "repoTableCell", for: indexPath) as? RepoTableViewCell else {
+        let cellId = Constants.GitProfile.repoCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? RepoTableViewCell else {
             return UITableViewCell()
         }
         cell.configUI(repo: repoList[indexPath.row])

@@ -12,4 +12,7 @@ struct Constants {
     struct Search {
         static let resultCell = "gitSearchResultCell"
     }
+    struct GitProfile {
+        static let repoCell = "repoTableCell"
+    }
 }

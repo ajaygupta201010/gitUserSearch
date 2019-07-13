@@ -27,6 +27,7 @@
 		3E4940DC22D8EF8E00CF5A2A /* GitSearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4940DB22D8EF8E00CF5A2A /* GitSearchUser.swift */; };
 		3E4940DE22D9084800CF5A2A /* GitUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4940DD22D9084800CF5A2A /* GitUserProfile.swift */; };
 		3E4940E022D98A8900CF5A2A /* GitUserRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4940DF22D98A8900CF5A2A /* GitUserRepo.swift */; };
+		3E4940E622D9CF2300CF5A2A /* WaitingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4940E522D9CF2300CF5A2A /* WaitingIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		3E4940DB22D8EF8E00CF5A2A /* GitSearchUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitSearchUser.swift; sourceTree = "<group>"; };
 		3E4940DD22D9084800CF5A2A /* GitUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitUserProfile.swift; sourceTree = "<group>"; };
 		3E4940DF22D98A8900CF5A2A /* GitUserRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitUserRepo.swift; sourceTree = "<group>"; };
+		3E4940E522D9CF2300CF5A2A /* WaitingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				3E0472F422D8CAD3006F1CD8 /* Utility.swift */,
+				3E4940E522D9CF2300CF5A2A /* WaitingIndicator.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -158,7 +161,6 @@
 			children = (
 				3E134CEB22D76B9B00725DFE /* Service.swift */,
 				3E134CEC22D76B9B00725DFE /* ServiceManager.swift */,
-				3E134CED22D76B9B00725DFE /* URLConstants.swift */,
 				3E0472F722D8D1FD006F1CD8 /* ServiceErrors.swift */,
 			);
 			path = Services;
@@ -176,6 +178,7 @@
 		3E4940E122D9C55300CF5A2A /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				3E134CED22D76B9B00725DFE /* URLConstants.swift */,
 				3E0472F322D8CAD3006F1CD8 /* Constants.swift */,
 			);
 			path = Constants;
@@ -193,11 +196,11 @@
 		3E4940E322D9CA4200CF5A2A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				3E134CCE22D75FCC00725DFE /* Main.storyboard */,
 				3E134CCA22D75FCC00725DFE /* AppDelegate.swift */,
 				3E134CD122D75FCF00725DFE /* Assets.xcassets */,
-				3E134CD322D75FCF00725DFE /* LaunchScreen.storyboard */,
 				3E134CD622D75FCF00725DFE /* Info.plist */,
+				3E134CCE22D75FCC00725DFE /* Main.storyboard */,
+				3E134CD322D75FCF00725DFE /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				3E134CCB22D75FCC00725DFE /* AppDelegate.swift in Sources */,
 				3E134CF722D866B900725DFE /* UserTableViewCell.swift in Sources */,
 				3E0472F522D8CAD3006F1CD8 /* Constants.swift in Sources */,
+				3E4940E622D9CF2300CF5A2A /* WaitingIndicator.swift in Sources */,
 				3E134CF922D866D900725DFE /* RepoTableViewCell.swift in Sources */,
 				3E04731322D8D7D4006F1CD8 /* GitRepoCellModel.swift in Sources */,
 				3E134CEE22D76B9B00725DFE /* Service.swift in Sources */,
@@ -481,7 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GitHubUsers/Info.plist;
+				INFOPLIST_FILE = GitHubUsers/Resource/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -498,7 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GitHubUsers/Info.plist;
+				INFOPLIST_FILE = GitHubUsers/Resource/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

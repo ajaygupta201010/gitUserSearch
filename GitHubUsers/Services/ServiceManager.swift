@@ -22,7 +22,9 @@ class ServiceManager {
             "sort": "score"
         ]
         
+        WaitingIndicator.showWaiting()
         Service.request(url, parameters: param, type: type) { result in
+            WaitingIndicator.stopWaiting()
             switch result {
             case .success(let object):
                 completion(Result.success(object))
@@ -34,11 +36,15 @@ class ServiceManager {
     
     static func fetchUserProfile<T: Decodable>(url: String, type: T.Type, completion: @escaping (T?) -> Void) {
         var gitUserProfile: GitUserProfile?
+        WaitingIndicator.showWaiting()
         Service.request(url, parameters: nil, type: type) { result in
+            WaitingIndicator.stopWaiting()
             switch result {
             case .success(let gitUserDetails):
                 gitUserProfile = gitUserDetails as? GitUserProfile
+                WaitingIndicator.showWaiting()
                 self.fetchGitRepos(url: gitUserProfile?.repos_url ?? "", type: GitUserRepoList.self, completion: { gitUserRepos in
+                    WaitingIndicator.stopWaiting()
                     gitUserProfile?.repo = gitUserRepos?.gitRepo
                     completion(gitUserProfile as? T)
                 })
