@@ -34,10 +34,6 @@ class Utility {
         view.layer.cornerRadius = view.frame.height / 2
         view.layer.masksToBounds = false
         view.clipsToBounds = true
-        
-        // make square(* must to make circle),
-        // resize(reduce the kilobyte) and
-        // fix rotation.
         view.image = anyImage
     }
     
