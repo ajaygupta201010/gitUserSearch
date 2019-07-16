@@ -16,16 +16,22 @@ class UserDetailViewController: UIViewController {
     private var userProfile: GitUserProfile?
     private var repoList: [GitUserRepo] = []
     
+    @IBOutlet weak var userDetailView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userFullName: UILabel!
-    @IBOutlet weak var companyName: UILabel!
+    @IBOutlet weak var companyOrLocationName: UILabel!
     @IBOutlet weak var followers: UILabel!
     @IBOutlet weak var lastUpdateAtLabel: UILabel!
     @IBOutlet weak var repositoriesTableView: UITableView!
+    @IBOutlet weak var companyOrLocationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    @IBAction func shareButtonClicked(_ sender: Any) {
+        shareUserDetails()
     }
 }
 
@@ -41,9 +47,14 @@ extension UserDetailViewController {
         guard let usrProfile = userProfile else { return }
         fetchAvatar(urlStr: userProfile?.avatar_url ?? "")
         userFullName.text = usrProfile.name
-        companyName.text = usrProfile.company
         followers.text = String(describing: usrProfile.followers ?? 0)
         lastUpdateAtLabel.text = Utility.convertDate(usrProfile.updated_at ?? "")
+        
+        let isCompanyNameEmpty = (userProfile?.company?.isEmpty ?? false)
+        
+        companyOrLocationLabel.text = isCompanyNameEmpty ? Constants.GitProfile.userLocationLabel : Constants.GitProfile.companyNameLabel
+        companyOrLocationName.text = usrProfile.company ?? userProfile?.location
+        
     }
     
     private func fetchAvatar(urlStr: String) {
@@ -91,5 +102,32 @@ extension UserDetailViewController {
                 }
             }
         }
+    }
+}
+
+// MARK: Share user info with other Apps
+extension UserDetailViewController {
+    
+    func shareUserDetails() {
+   /// uncomment below code if need user profile as image
+        
+ /*       var screenShotImage: UIImage?
+        let scale = UIScreen.main.scale
+        let size = CGSize(width: userDetailView.frame.size.width, height: (userDetailView.frame.size.height - 50))
+
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+
+        userDetailView.layer.render(in: context)
+        screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+ */
+        let url = URL(string: userProfile?.html_url ?? "www.github.com")
+        let shareText =  "\n \(userProfile?.name ?? "")"
+        
+        Utility.shareDetailsWithOtherApps(viewController: self, url: url,
+                                          text: shareText)
     }
 }

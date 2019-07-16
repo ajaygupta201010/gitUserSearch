@@ -17,7 +17,9 @@ struct GitUserProfile: Codable {
 	let updated_at : String?
     let repos_url : String?
     var repo : [GitUserRepo]?
-
+    var location: String?
+    var url: String?
+    
 	enum CodingKeys: String, CodingKey {
 		case avatar_url = "avatar_url"
 		case html_url = "html_url"
@@ -27,6 +29,8 @@ struct GitUserProfile: Codable {
 		case updated_at = "updated_at"
         case repos_url = "repos_url"
         case repo
+        case location = "location"
+        case url = "url"
 	}
 
 	init(from decoder: Decoder) throws {
@@ -38,5 +42,7 @@ struct GitUserProfile: Codable {
 		followers = try values.decodeIfPresent(Int.self, forKey: .followers)
 		updated_at = try values.decodeIfPresent(String.self, forKey: .updated_at)
         repos_url = try values.decodeIfPresent(String.self, forKey: .repos_url)
+        location = try values.decodeIfPresent(String.self, forKey: .location)
+        url = try values.decodeIfPresent(String.self, forKey: .url)
 	}
 }

@@ -14,5 +14,7 @@ struct Constants {
     }
     struct GitProfile {
         static let repoCell = "repoTableCell"
+        static let userLocationLabel = "User Location:"
+        static let companyNameLabel = "User Location:"
     }
 }

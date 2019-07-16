@@ -11,11 +11,13 @@ import UIKit
 class SearchUserViewController: UIViewController {
 
     @IBOutlet weak var usersList: UITableView!
-    private var searchResults: [GitUser] = []
+    var searchResults: [GitUser] = []
     
     var searchVC: UISearchController = {
         let vc = UISearchController(searchResultsController: nil)
-        vc.searchBar.placeholder = "Please search text here..."
+        vc.searchBar.placeholder = "Please search users here..."
+        vc.searchBar.tintColor = .white
+        vc.searchBar.barStyle = .black
         return vc
     }()
     
@@ -33,22 +35,14 @@ extension SearchUserViewController {
         self.navigationItem.searchController = searchVC
         searchVC.searchBar.delegate = self
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        // table
+        
+        // Removing unused cells
         self.usersList.tableFooterView = UIView()
-    }
-    
-    func addBackButton() {
-        let backImage = #imageLiteral(resourceName: "back")
-        let backButton = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
-        self.navigationItem.leftBarButtonItem = backButton
     }
 }
 
 // MARK: event handlers
 extension SearchUserViewController {
-    @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? UserDetailViewController {

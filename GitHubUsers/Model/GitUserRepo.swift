@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct GitUserRepoList : Codable {
-    let gitRepo : [GitUserRepo]?
+struct GitUserRepoList: Codable {
+    let gitRepo: [GitUserRepo]?
     
     init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
@@ -27,7 +27,7 @@ struct GitUserRepoList : Codable {
 }
 
 
-struct GitUserRepo : Codable {
+struct GitUserRepo: Codable {
 	let id : Int?
 	let name : String?
 	let full_name : String?

@@ -50,6 +50,36 @@ class Utility {
             return dateFormatter.string(from: dt)
         }
         return ""
+    }
+    
+    class func shareDetailsWithOtherApps(viewController: UIViewController, url: URL? = nil,
+                                         text: String? = nil, image: UIImage? = nil) {
         
+        var objectsToShare = [Any]()
+        
+        if let url = url {
+            objectsToShare.append(url)
+        }
+        
+        if let text = text {
+            objectsToShare.append(text)
+        }
+        if let image = image {
+            objectsToShare.append(image)
+        }
+        
+        let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        activityController.popoverPresentationController?.sourceView = viewController.view
+        
+        DispatchQueue.main.async {
+            viewController.present(activityController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension UISearchBar {
+    var textField: UITextField? {
+        return subviews.first?.subviews.compactMap { $0 as? UITextField }.first
     }
 }
