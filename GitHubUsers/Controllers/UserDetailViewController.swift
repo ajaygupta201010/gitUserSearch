@@ -33,6 +33,14 @@ class UserDetailViewController: UIViewController {
     @IBAction func shareButtonClicked(_ sender: Any) {
         shareUserDetails()
     }
+    
+    func setUserProfile(profile: GitUserProfile?) {
+        userProfile = profile
+    }
+    
+    func setRepoList(list: [GitUserRepo]) {
+        repoList = list
+    }
 }
 
 // MARK: private and local methods
@@ -90,13 +98,14 @@ extension UserDetailViewController: UITableViewDataSource {
 extension UserDetailViewController {
     func fetchUserProfileDetails(url: String) {
         ServiceManager.fetchUserProfile(url: url, type: GitUserProfile.self) { (usrProfile) in
-            self.userProfile = usrProfile
+            self.setUserProfile(profile: usrProfile)
             DispatchQueue.main.async {
                 self.updateUserDetails()
             }
             
             if let repos = usrProfile?.repo, !repos.isEmpty {
-                self.repoList = repos
+                self.setRepoList(list: repos)
+                //self.repoList = repos
                 DispatchQueue.main.async {
                     self.repositoriesTableView.reloadData()
                 }

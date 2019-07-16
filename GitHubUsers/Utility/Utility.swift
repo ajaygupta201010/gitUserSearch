@@ -77,9 +77,3 @@ class Utility {
         }
     }
 }
-
-extension UISearchBar {
-    var textField: UITextField? {
-        return subviews.first?.subviews.compactMap { $0 as? UITextField }.first
-    }
-}
